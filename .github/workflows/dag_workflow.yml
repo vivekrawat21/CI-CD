@@ -1,0 +1,36 @@
+name: Directed Acyclic Graph Workflow
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is Job 1"
+      - run: echo "Job 1 other step completed"  
+      - run: echo "Job 1 subsequent step completed"
+      - run: echo "Job 1 final step completed"
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is Job 2"
+      - run: echo "Job 2 other step completed"  
+      - run: echo "Job 2 subsequent step completed"
+      - run: echo "Job 2 final step completed"
+  job3:
+    runs-on: ubuntu-latest
+    needs:
+      - job1
+      - job2
+    steps:
+      - run: echo "This is Job 3 it needs Job 1 and Job 2 to complete first" 
+      - run: echo "Job 3  completed"
+  job4:
+    runs-on: ubuntu-latest
+    needs:
+      - job2
+      - job3
+    steps:
+      - run : echo "This is Job 4 it needs Job 2 and Job 3 to complete first"
+      - run : echo "Job 4 completed"
