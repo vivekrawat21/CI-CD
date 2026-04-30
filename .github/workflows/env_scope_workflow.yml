@@ -7,7 +7,7 @@ env:
 
 jobs:
   job1:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       JOB_VAR: "I am a Job1 variable"
     steps:
@@ -25,7 +25,7 @@ jobs:
           echo "Job1 variable: $JOB_VAR"
           echo "Step2 variable: $STEP_VAR"
   job2:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Print Workflow variable in Job2 step1
         run: |
