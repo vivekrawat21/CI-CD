@@ -1,0 +1,31 @@
+name: Trigger & Filter Workflow
+
+on:
+  push:
+    branches:
+      - "action-trigger-filter/*"
+
+  pull_request:
+    types: 
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "trigger/filters/*.md"
+      - "!trigger/filters/*.txt"
+
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  debug-event:
+    runs-on: ubuntu-latest
+    steps:
+     - name:  Echo message
+       run: echo "This workflow can be triggered by push, pull request, or schedule events. It also demonstrates path filtering for pull requests."
+
+     - name:  Dump event JSON
+       run: |
+          echo "Dumping event data..."
+          echo "=== ${GITHUB_EVENT_NAME} payload ==="
+          cat "${GITHUB_EVENT_PATH}"
