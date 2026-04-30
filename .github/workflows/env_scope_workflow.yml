@@ -1,0 +1,34 @@
+name: ENV Scope Workflow
+
+on:
+  workflow_dispatch:
+env:
+  WORKFLOW_VAR: "I am a Workflow variable"
+
+jobs:
+  job1:
+    runs-on: ubuntu-20.04
+    env:
+      JOB_VAR: "I am a Job1 variable"
+    steps:
+      - name: Print Workflow Step Job variables in Job1 step1
+        env:
+          STEP_VAR: "I am a Step variable in Job1 step1"
+        run: |
+          echo "Workflow variable: $WORKFLOW_VAR"
+          echo "Job1 variable: $JOB_VAR"
+          echo "Step1 variable: $STEP_VAR"
+        
+      - name: Print Workflow,Step, Job variables in Job1 step2
+        run: |
+          echo "Workflow variable: $WORKFLOW_VAR"
+          echo "Job1 variable: $JOB_VAR"
+          echo "Step2 variable: $STEP_VAR"
+  job2:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Print Workflow variable in Job2 step1
+        run: |
+          echo "Workflow variable: $WORKFLOW_VAR"
+          echo "Job2 variable: $JOB_VAR"
+          echo "Step1 variable: $STEP_VAR"
