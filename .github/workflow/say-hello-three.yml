@@ -1,0 +1,21 @@
+name: parallel jobs
+on:
+  workflow_dispatch:
+jobs:
+  say-hello-inline-bash:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World from inline bash script!"
+  say-hello-from-python:
+    runs-on: ubuntu-latest
+    steps:
+      runs-on: ubuntu-latest
+      steps:
+        - run: print("Hello World from Python script!")
+          shell: python
+  say-hello-from-javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/hello-world-javascript-action@081a6d193d1dcb38460df1e6927486d748730f9d
+        with:
+          who-to-greet: 'world'
