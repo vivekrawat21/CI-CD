@@ -1,0 +1,42 @@
+name: Staging and production environment workflow
+on:
+  workflow_dispatch:
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    env:
+      # environment level secrets and variables are accessible 
+      EXAMPLE_ENV_SECRET: ${{ secrets.EXAMPLE_ENVIRONMENT_SECRET }}
+      EXAMPLE_ENV_VARIABLE: "${{ vars.EXAMPLE_ENVIRONMENT_VARIABLE }}"
+
+     #repository level secrets and variables are also accessible in environment
+      EXAMPLE_REPOSITORY_SECRET: ${{ secrets.EXAMPLE_REPOSITORY_SECRET }}
+      EXAMPLE_REPOSITORY_VARIABLE: "${{ vars.EXAMPLE_REPOSITORY_VARIABLE }}"
+
+    steps:
+      - name: Print environment and repository secrets and variables in staging job
+        run: |
+          echo "Staging Environment Secret: $EXAMPLE_ENV_SECRET"
+          echo "Staging Environment Variable: $EXAMPLE_ENV_VARIABLE"
+          echo "Repository Secret in Staging: $EXAMPLE_REPOSITORY_SECRET"
+          echo "Repository Variable in Staging: $EXAMPLE_REPOSITORY_VARIABLE" 
+
+  production:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      # environment level secrets and variables are accessible
+      EXAMPLE_ENV_SECRET: ${{ secrets.EXAMPLE_ENVIRONMENT_SECRET }}
+      EXAMPLE_ENV_VARIABLE: "${{ vars.EXAMPLE_ENVIRONMENT_VARIABLE }}"  
+      #repository level secrets and variables are also accessible in environment
+      EXAMPLE_REPOSITORY_SECRET: ${{ secrets.EXAMPLE_REPOSITORY_SECRET }}
+      EXAMPLE_REPOSITORY_VARIABLE: "${{ vars.EXAMPLE_REPOSITORY_VARIABLE }}"  
+
+    steps:
+      - name: Print environment and repository secrets and variables in production job
+        run: |
+          echo "Production Environment Secret: $EXAMPLE_ENV_SECRET"
+          echo "Production Environment Variable: $EXAMPLE_ENV_VARIABLE"
+          echo "Repository Secret in Production: $EXAMPLE_REPOSITORY_SECRET"
+          echo "Repository Variable in Production: $EXAMPLE_REPOSITORY_VARIABLE"  
